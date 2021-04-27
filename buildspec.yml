@@ -6,13 +6,13 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      
+      - npm install -g ionic@5.4.16
     finally:
       - echo This always runs even if the update or install command fails 
   pre_build:
     commands:
       - echo Entered the pre_build phase...
-      - ng build
+      - ionic build
     finally:
       - echo This always runs even if the login command fails 
   build:
