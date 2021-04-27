@@ -8,7 +8,7 @@ phases:
       - echo Entered the install phase...
       - npm install -g ionic@5.4.16
       - npm install -g @angular/cli
-
+      - npm install
     finally:
       - echo This always runs even if the update or install command fails 
   pre_build:
