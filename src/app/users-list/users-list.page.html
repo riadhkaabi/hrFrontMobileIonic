@@ -1,0 +1,54 @@
+<ion-header >
+  <ion-toolbar  style="font-family: Roboto ;color: rgb(255, 140, 64);font-size: 15px;">
+    <ion-title>Employees</ion-title>
+    <ion-icon class="update-style" name="download-outline" (click)="updateDeviceUsers()"></ion-icon>
+    </ion-toolbar>
+    <ion-searchbar style="--border-radius: 15px; --background:rgb(255, 254, 254);margin-top: -10px;" #search showCancelButton="focus" debounce="500" (ionChange)="ionChange($event)"></ion-searchbar>
+
+  </ion-header>
+<ion-content class="has-header" overflow-scroll="false" has-bouncing="true"  style="--ion-background-color:#e9e6e6;">
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+<ion-card style="--ion-background-color:#f5f4f4;">
+<ion-list *ngFor="let user of searchedItem" >
+  <ion-card class="card-style" >
+    <div class="card-content">
+      <img src={{user.photo}}>
+      <ion-label >
+        <h2 style="text-transform: lowercase; text-transform: capitalize;">{{user.firstName+" "}}{{user.lastName}}</h2>
+        <div [ngClass]="(user.holidayState === 1)?'holiday-status-bg':'work-status-bg'">{{user.holidayState === 1 ? 'In holiday' : 'Working'}}</div>
+        <p>Mobile Developer</p>
+      </ion-label>
+    </div>
+
+    <ion-icon  style=" font-size: 1.5rem; margin-top: 18px; margin-left: 280px;" color="secondary" name="close-circle-outline" (click)="deleteUser(user)"></ion-icon>
+
+    <div class="card-info">
+      <ion-label>
+        <h2>Email:</h2>
+        <p>{{user.email}}</p>
+      </ion-label>
+    </div>
+    <div class="card-info">
+      <ion-label style="margin-top: 45px;">
+        <h2>Phone Number: </h2><br>
+        <p style="margin-top: -15px;">{{user.phoneNumber}}</p>
+      </ion-label>
+    </div>
+    <div>
+      <ion-button class="btn-card" style="text-transform: lowercase; text-transform: capitalize; border-color: white;" (click)="assignAdminRole(user)">Assign Admin</ion-button>
+      <ion-button class="btn-card-match" style="text-transform: lowercase; text-transform: capitalize; border-color: white;" (click)="matchUser(user)">Match user</ion-button>
+
+    </div>
+    </ion-card>
+  </ion-list>
+
+</ion-card>
+
+
+
+</ion-content>
+<ion-fab-button style="margin-right: 15px; position: absolute ; right:0;bottom:0;margin-bottom: 10px;"  (click)="openMyModal()">
+  <ion-icon name="add-outline"></ion-icon>
+</ion-fab-button>

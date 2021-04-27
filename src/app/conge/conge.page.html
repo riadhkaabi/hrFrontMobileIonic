@@ -1,0 +1,234 @@
+    <ion-header >
+      <ion-toolbar>
+        <ion-title>Holidays</ion-title>
+      </ion-toolbar>
+    </ion-header>
+   
+    <ion-content class="has-header" overflow-scroll="false" has-bouncing="true"   style="--ion-background-color:#e9e6e6;">
+      <div  style="padding-top: 0">
+      <ion-card style="--ion-background-color:#ffffff;" >
+       
+        <div class="card-header">
+          <ion-icon style="font-size: 25px;margin-left: -12px;font-weight: bold;" name="walk-outline"></ion-icon>
+          <p class="title-style" style="margin-left: 5px;">Request for a holiday</p>
+        </div>
+
+      <ion-list class="ion-padding" lines="none" style="margin-top: 20px;">
+        <form role="form" [formGroup]="holidayForm" (ngSubmit)="onSubmit()">
+       <ion-item style="height: 45px;margin-top: -28px;">
+          <ion-label class="normal-text">Leaving from</ion-label>
+          <ion-datetime formControlName="fromDate" class="normal-text" style="margin-right: 10px; font-size: 13px;" value="" placeholder="Select Date" required></ion-datetime>
+          <ion-icon name="calendar-outline" style="float: left;"></ion-icon>
+
+        </ion-item>
+        <ion-item style="height: 45px;">
+          <ion-label class="normal-text" > To</ion-label>
+          <ion-datetime formControlName="toDate" class="normal-text" value=" " style="margin-right: 10px; font-size: 13px;" placeholder="Select Date" required ></ion-datetime>
+          <ion-icon name="calendar-outline"></ion-icon>
+        </ion-item>
+        <ion-item style="height: 45px;">
+          <ion-label class="normal-text">Reason</ion-label>
+          <ion-select formControlName="reason" class="normal-text" interface="popover" >
+            <ion-select-option *ngFor="let reason of reasons">{{this.reason}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button type="submit" expand="block" style="text-transform: lowercase; text-transform: capitalize;margin-top: 8px;" >Send</ion-button>
+      </form>
+         </ion-list>
+      </ion-card>
+    </div>
+     <div *ngIf="showDiv ==true">
+       <ion-card style="--ion-background-color:#ffffff;">
+         <div *ngFor="let item of items">
+          <div class="card-head">
+            <p class="title-style">Pending Holidays</p>
+            <ion-icon  name="chevron-forward-outline" [ngClass]="(item.expanded ? 'arrow-style expanded' : 'arrow-style')" (click)="expandItem(item)"></ion-icon> 
+            </div>
+          <div class="second-title-style" >
+          </div>
+         
+          <ion-card-content>
+            <app-expandable expandheight="100px" [expanded]="item.expanded">
+              <p>
+                <ion-chip (click)="getPendingByAlphabetics()" outline color="#ccc">
+                  <ion-label>Names A-Z</ion-label>
+                </ion-chip>
+                <ion-chip (click)="getPendingByReason()"  outline color="warning">
+                  <ion-label>Reason</ion-label>
+                </ion-chip>
+                <ion-chip (click)="getPendingByClosetsDate()" outline color="#ccc">
+                  <ion-label>Closest date</ion-label>
+                </ion-chip>
+             </p>
+            </app-expandable>
+          </ion-card-content>
+         </div>
+
+         <ion-slides style="margin-top: -20px;">
+          <ion-slide *ngFor="let holiday of pendingHolidays">
+            
+                <ion-card class="card-style" >
+
+                  <div class="card-content">
+                    <img  src="{{holiday.user.photo}}">
+
+                    <ion-label>
+                      
+                      <h2 style="text-transform: lowercase; text-transform: capitalize;">{{holiday.user.firstName+" "}}{{holiday.user.lastName}}</h2>
+
+                    </ion-label><br>
+                    <ion-icon style="font-size: 1.2rem;margin-left: 100px; color: white;" name="chevron-forward-outline"></ion-icon>
+                    <ion-icon style="font-size: 1.2rem;margin-left: -11px; color: white;" name="chevron-forward-outline"></ion-icon>
+
+                  </div>
+
+                  <div class="card-info">
+                    <ion-label style="margin-top: 15px;">
+                      <h2>Leaving From: </h2>
+                      <p style="margin-left: -16px;">{{holiday.fromDate|date}}</p>
+                    </ion-label>
+                 </div>
+                <div class="card-info">
+                    <ion-label style="margin-top: 60px;">
+                      <h2>Leaving To: </h2>
+                      <p>{{holiday.toDate|date}}</p>
+                    </ion-label>
+                </div>
+                <div class="card-info" style="top: 190px;">
+                    <ion-label >
+                      <h2>Reason: </h2>
+                      <p>{{holiday.reason}}</p>
+                    </ion-label>
+                </div>
+                  <div>
+                    
+                    <ion-button class="btn-card-confirm"  style="text-transform: lowercase; text-transform: capitalize;background-color: white;" (click)="confirmHoliday(holiday)">Confirm</ion-button>
+                    <ion-button class="btn-card-reject"   style="text-transform: lowercase; text-transform: capitalize;background-color: white"  (click)="rejectHoliday(holiday)">Reject</ion-button>
+
+                  </div>
+
+                  </ion-card>
+              
+          </ion-slide>
+         </ion-slides>
+
+        <div *ngFor="let it of its">
+          <div class="card-head">
+            <p class="title-style">Assigned Holidays</p>
+            <ion-icon  name="chevron-forward-outline" [ngClass]="(it.expanded ? 'arrow-style expanded' : 'arrow-style')" (click)="expandItemAssigned(it)"></ion-icon>
+
+            </div>
+
+
+         <div class="second-title-style" >
+         </div>
+        
+         <ion-card-content>
+           <app-expandable expandheight="100px" [expanded]="it.expanded">
+             <p>
+               <ion-chip (click)="getAssignedAlphabetics()" outline color="#ccc">
+                 <ion-label>Names A-Z</ion-label>
+               </ion-chip>
+               <ion-chip (click)="getAssignedReason()" outline color="warning">
+                 <ion-label>Reason</ion-label>
+               </ion-chip>
+               <ion-chip (click)="getAssignedClosetstDate()" outline color="#ccc">
+                 <ion-label>Closest date</ion-label>
+               </ion-chip>
+            </p>
+           </app-expandable>
+         </ion-card-content>
+        </div>
+          <ion-slides style="margin-top: -20px;">
+            <ion-slide *ngFor="let holiday of assignedHolidays">
+              <ion-card class="card-style-assigned"   >
+                <div class="card-content">
+                  <img src="{{holiday.user.photo}}">
+                  <ion-label>
+                    <h2 style="text-transform: lowercase; text-transform: capitalize;">{{holiday.user.firstName+" "}}{{holiday.user.lastName}}</h2>
+                  </ion-label><br>
+                  <ion-icon style="font-size: 1.2rem;margin-left: 100px; color: white;" name="chevron-forward-outline"></ion-icon>
+                    <ion-icon style="font-size: 1.2rem;margin-left: -11px; color: white;" name="chevron-forward-outline"></ion-icon>
+
+                </div>
+                <div class="card-info" style="top: 95px;">
+                  <ion-label>
+                    <h2>Leaving From: </h2>
+                    <p style="margin-left: -30px;">{{holiday.fromDate}}</p>
+                  </ion-label>
+                </div>
+                <div class="card-info-to" style="top: 95px;">
+                  <ion-label>
+                    <h2>Leaving To: </h2>
+                    <p style="margin-left: -0.5px;">{{holiday.toDate}}</p>
+                  </ion-label>
+                </div>
+                <div class="card-info" style="top: 140px;">
+                  <ion-label>
+                    <h2>Reason: </h2>
+                    <p>{{holiday.reason}}</p>
+                  </ion-label>
+                </div>
+                
+                </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-card>
+      </div>
+
+     <div *ngIf="showUserDiv ==true">
+        <ion-card style="--ion-background-color:#ffffff;">
+        <div *ngFor="let it of its">
+          <div class="card-head">
+            <p class="title-style">My confirmed holidays</p>
+
+            </div>
+         <div class="second-title-style" >
+         </div>
+        
+         <ion-card-content>
+           
+         </ion-card-content>
+        </div>
+          <ion-slides style="margin-top: -20px;">
+            <ion-slide *ngFor="let holiday of confirmedUserHoliday">
+              <ion-card class="card-style-assigned"   >
+                <div class="card-content">
+                  <img src="{{holiday.user.photo}}">
+                  <ion-label>
+                    <h2 style="text-transform: lowercase; text-transform: capitalize;">{{holiday.user.firstName+" "}}{{holiday.user.lastName}}</h2>
+                  </ion-label><br>
+                  <ion-icon style="font-size: 1.2rem;margin-left: 100px; color: white;" name="chevron-forward-outline"></ion-icon>
+                    <ion-icon style="font-size: 1.2rem;margin-left: -11px; color: white;" name="chevron-forward-outline"></ion-icon>
+
+                </div>
+                <div class="card-info" style="top: 95px;">
+                  <ion-label>
+                    <h2>Leaving From: </h2>
+                    <p style="margin-left: -30px;">{{holiday.fromDate}}</p>
+                  </ion-label>
+                </div>
+                <div class="card-info-to" style="top: 95px;">
+                  <ion-label>
+                    <h2>Leaving To: </h2>
+                    <p style="margin-left: -0.5px;">{{holiday.toDate}}</p>
+                  </ion-label>
+                </div>
+                <div class="card-info" style="top: 140px;">
+                  <ion-label>
+                    <h2>Reason: </h2>
+                    <p>{{holiday.reason}}</p>
+                  </ion-label>
+                </div>
+                
+                </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-card>
+       </div>
+
+
+
+
+
+  </ion-content>

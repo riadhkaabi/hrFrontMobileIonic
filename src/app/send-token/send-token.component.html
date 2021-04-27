@@ -1,0 +1,14 @@
+
+<ion-card class="add_user_div">
+  <div style="height: 10%; background-color:primary;">
+    <ion-text style="display: flex;justify-content: center; align-items: center; height: 50%;color: white;font-weight: bold; font-family: Roboto;padding-top: 35px;font-size: 1.2rem;">Add User</ion-text>
+    <ion-icon  style=" font-size: 1.5rem;float: right;margin-top: -25px;margin-right: 10px;" color="secondary" name="close-circle-outline" (click)="closeModal()"></ion-icon>
+
+  </div>
+  
+  <form id="form" role="form" [formGroup]="credentialForm" (ngSubmit)="addUser()">
+    <ion-input ng-model="Username"  formControlName="username" placeholder="Username" class="input-underline" autofocus="true" clearInput="true" color="none"></ion-input>
+    <ion-input placeholder="Email" formControlName="email" autofocus="true" clearInput="true" class="input-underline"></ion-input>
+    <ion-button class="ion-btn" expand="block" shape="round" color="primary"  type="submit" style="text-transform: lowercase; text-transform: capitalize;margin-top: 55px;">Send</ion-button>
+  </form>
+  </ion-card>

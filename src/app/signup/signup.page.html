@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/login">Log in</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="header">
+    <img src="assets/images/bertsch.png" />
+    <h1>Create your Account</h1>
+  </div>
+  <form id="form" role="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <ion-input formControlName="firstName" placeholder="First Name" class="input-underline" color="none"></ion-input>
+    <ion-input formControlName="lastName"placeholder="Last Name" class="input-underline" color="none"></ion-input>
+    <ion-input formControlName="email" placeholder="Email" class="input-underline" color="none"></ion-input>
+    <ion-input formControlName="password" placeholder="Password" type="password" class="input-underline" color="none"></ion-input>
+    <ion-input formControlName="phoneNumber" placeholder="Phone Number" class="input-underline" color="none"></ion-input>
+    <ion-button expand="block" shape="round" type="submit" routerLink="/add-picture" >Join Us</ion-button>
+  </form>
+
+  <p>By pressing 'Join Us' you agree to <br />our terms & conditions.</p>
+</ion-content>

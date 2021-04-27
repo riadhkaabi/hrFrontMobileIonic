@@ -1,0 +1,43 @@
+
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom" color="#F3F3F3">
+
+  <ion-tab-button *ngIf="showIconAdmin == true" selected="true" tab="home">
+  <ion-icon name="analytics-outline"></ion-icon>
+  <ion-label>Dashboard</ion-label>
+  </ion-tab-button>
+  
+  <ion-tab-button *ngIf="showIconUser == true"  tab="holiday">
+    <ion-icon name="walk-outline"></ion-icon>
+        <ion-label>Holidays</ion-label>
+    </ion-tab-button>
+
+  <ion-tab-button tab="messages-list">
+  <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+  <ion-label>Messages</ion-label>
+  </ion-tab-button>
+  
+  
+  <ion-tab-button tab="notifications">
+  
+    <div>
+
+  
+    <div class="orange-notif-circle">{{countMsg}}</div>
+
+  <ion-icon class="bell-notif-icon" name="notifications-outline">
+    
+  </ion-icon>
+</div>
+  <ion-label>Notifications</ion-label>
+
+  </ion-tab-button>
+  
+  <ion-tab-button tab="profile">
+  <ion-icon name="person-outline"></ion-icon>
+  <ion-label>Profile</ion-label>
+  </ion-tab-button>
+  
+  </ion-tab-bar>
+  </ion-tabs>

@@ -1,0 +1,157 @@
+<ion-content class="has-header" overflow-scroll="false" has-bouncing="true" style="--ion-background-color:#f0f0f0;">
+  
+  <ion-card class="header-card-style" style="--ion-background-color:#ffffff; padding: 0 10px;">
+    <img src="assets/images/bertsch.png"/>
+
+      <ion-label style=" margin-top: 2.5%;" >
+
+        <div style="padding-bottom: 7.5px;
+        border-bottom: 1px solid rgba(255,255,255, 0.8);
+        margin-left: 5px;">
+          <p style=" font-size: 16px;
+          text-transform: capitalize;
+          margin-left: 0;">{{currentUser.firstName+" "+currentUser.lastName}}</p>
+          <h1 style="margin-left: 0; font-size: 14px;">Welcome to BertschInnovation</h1>
+        </div>
+          <p style="margin-top: 15px; margin-top: 1.5px;
+          font-weight: unset; font-size: 11px;">Official work time is from <b>{{workStart}}</b> to <b>{{workEnd}}</b></p>
+       
+
+        <p class="date">{{today}}</p>
+      </ion-label>
+
+      
+  </ion-card>
+ 
+ 
+      <div class="ion-padding" style="padding-bottom:  0">
+       
+    <ion-card style="--ion-background-color:#ffffff;">
+      
+
+      <ion-card-header class="title-style-normal" style="text-align: center">
+        <ion-icon style="font-size: 18px;" name="flash-outline"></ion-icon>
+
+        Presence Preview of <b>{{today}}</b>
+        Number of employees : <b>{{nbEmp}}</b>
+
+      </ion-card-header>
+
+      <ion-card-content>
+        <canvas #doughnutCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+    <ion-card style="--ion-background-color:#ffffff;">
+      <ion-card-header  class="title-style-normal"  style="text-align: center;">
+        <ion-icon style="font-size: 18px;" name="flash-outline"></ion-icon>
+
+        Punctuality Preview of <b>{{" "+today}}</b>
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #doughnutCanvas2></canvas>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  
+  
+  <div class="ion-padding" style="padding-top: 0" >
+  <ion-card style="--ion-background-color:#ffffff;" >
+    
+       
+        <div *ngFor="let item of its">
+          <div class="card-header">
+            <p class="title-style">Choose Employee</p>
+            <ion-icon  name="chevron-forward-outline" [ngClass]="(item.expanded ? 'arrow-style expanded' : 'arrow-style')" (click)="expandIt(item)"></ion-icon> 
+          </div>
+
+          <ion-card-content [ngClass]="!item.expanded ? 'padding-0' : 'padding-expanded'">
+        
+          <app-expandable expandheight="500px" [expanded]="item.expanded">
+          <ion-list lines="none" style="margin-top: -20px;">
+            <form role="form" [formGroup]="statDateForm" >
+                    
+              <ion-item >
+                <ion-label  style="font-family: Roboto; color:black;">Employee Name</ion-label>
+                <ion-select formControlName="selectedId" interface="popover" style="font-family: Roboto;font-size: 15px; margin-right: 8px;color: rgb(156, 152, 152);"   class="normal-text" value=""  required >
+                  <ion-select-option  value="{{employee.id}}" *ngFor="let employee of employeesList" >{{employee.empFirstname}}</ion-select-option>
+                </ion-select>
+                <ion-icon name="person-circle-outline" style="float: left; font-size: 1.2rem;"></ion-icon>
+              </ion-item>
+    
+           <ion-item >
+              <ion-label  style="font-family: Roboto; color:black;">From</ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY" style="font-family: Roboto;font-size: 15px; margin-right: 8px;color: rgb(156, 152, 152);" formControlName="fromDate"  class="normal-text" value="" placeholder="From" required></ion-datetime>
+              <ion-icon name="calendar-outline" style="float: left; font-size: 1.2rem"></ion-icon>
+           </ion-item>
+           <ion-item>
+              <ion-label style="font-family: Roboto; color: black;" >To</ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY"   style="font-family: Roboto;font-size: 15px; margin-right: 8px;color: rgb(156, 152, 152);" value=" " formControlName="toDate" placeholder="To" required ></ion-datetime>
+              <ion-icon name="calendar-outline"  style="font-size: 1.2rem"></ion-icon>
+           </ion-item>
+            
+            <ion-button type="submit" expand="block" style=" text-transform: lowercase; text-transform: capitalize;" (click)="getEmployeeAttendanceStats()" >View Statistics</ion-button>
+
+             </form>
+            </ion-list>
+            </app-expandable>
+            </ion-card-content>
+  </div>
+
+  <div >
+  <div [ngClass]="!showDiagram ? 'card-body' : 'card-body display'">
+    <ion-card style="--ion-background-color:#ffffff;">
+      <ion-card-header  class="title-style" >
+        Employee Statistics
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #barchartCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+</div>
+</div>
+     
+
+</ion-card>
+
+    <ion-card style="--ion-background-color:#ffffff;" >
+   
+     
+      <div *ngFor="let item of items">
+        <div class="card-header">
+        <p class="title-style"  >Set Work Time</p>
+        <ion-icon  name="chevron-forward-outline" [ngClass]="(item.expanded ? 'arrow-style expanded' : 'arrow-style')" (click)="expandItem(item)"></ion-icon>
+
+        </div>
+              
+              <ion-card-content [ngClass]="!item.expanded ? 'padding-0' : 'padding-expanded'">
+                <app-expandable expandheight="300px" [expanded]="item.expanded">
+                <ion-list lines="none" style="margin-top: -20px;">
+                  <form role="form" [formGroup]="timeForm"  (ngSubmit)="setTime()">
+                <ion-item >
+                    <ion-label  style="font-family: Roboto; color:black;">Starting from</ion-label>
+                    <ion-datetime style="font-family: Roboto;font-size: 15px; margin-right: 8px;color: rgb(156, 152, 152);" formControlName="fromTime" displayFormat="HH:mm" class="normal-text" value="" placeholder="Start Time" required></ion-datetime>
+                    <ion-icon name="timer-outline" style="float: left;font-size: 1.2rem"></ion-icon>
+                </ion-item>
+                  <ion-item>
+                    <ion-label style="font-family: Roboto; color: black;" >Ending</ion-label>
+                    <ion-datetime formControlName="toTime" displayFormat="HH:mm" style="font-family: Roboto;font-size: 15px; margin-right: 8px;color: rgb(156, 152, 152);" value=" " placeholder="End Time" required ></ion-datetime>
+                    <ion-icon name="timer-outline" style="font-size: 1.2rem"></ion-icon>
+                  </ion-item>
+                  <ion-button type="submit" expand="block" style="text-transform: lowercase; text-transform: capitalize;" >Set</ion-button>
+                </form>
+                  </ion-list>
+                  </app-expandable>
+                  </ion-card-content>
+       
+       
+        </div>
+     
+      </ion-card>
+      
+
+  </div>
+    </ion-content>
+    <ion-fab-button   style="margin-right: 15px; position: absolute ; right:0;bottom:0;margin-bottom: 10px;--background :black"  (click)="openMyModalQrScanner()">
+      <ion-icon color="light" name="qr-code-outline"></ion-icon>
+    </ion-fab-button>

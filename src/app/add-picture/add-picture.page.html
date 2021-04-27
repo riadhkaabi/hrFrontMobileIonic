@@ -1,0 +1,23 @@
+
+<ion-content [fullscreen]="true" style="--ion-background-color:#e9e6e6;">
+  <ion-card  style="border-radius: 20px;" style="--ion-background-color:#ffffff;margin-top: 60px;">
+  <img   src="{{imgURL}}" height="400" width="400">
+
+<ion-button expand="block" (click)="uploadImage()">Create</ion-button>
+</ion-card>
+
+<ion-fab horizontal="end" vertical="bottom" slot="fixed">
+  <ion-fab-button color="light">
+    <ion-icon name="images-outline"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="start">
+    <ion-fab-button (click)="getCamera()" color="light">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="getGallery()" color="light">
+      <ion-icon name="image-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+
+</ion-content>

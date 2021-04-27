@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons>
+      <ion-button color="primary" (click)="backToMessages()">
+        <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
+      </ion-button>
+      <div class="card-content-2">
+        <img src="../assets/images/aaaaa.jpg">
+        <p></p>
+      </div> 
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content class="ion-padding">
+
+  <ion-grid>
+    <ion-row *ngFor="let message of messages">
+      <div class="card-content" *ngIf="message.from !== fireBaseUser.uid"   >
+        <img src={{message.photo}}>
+      </div>
+      <ion-col size="9" class="message"[offset]="message.from===fireBaseUser.uid ? 3: 0" [ngClass]="{ 'my-message': message.from == fireBaseUser.uid,'other-message': message.from !== fireBaseUser.uid }">
+      
+        <b>{{ message.firstName +" "+message.lastName }}</b><br>
+        <span>{{ message.msg }}</span>
+        <div class="time ion-text-right"><br>{{ message.createdAt?.toMillis() | date:'short' }}</div>
+      </ion-col>
+      
+    </ion-row>
+    
+  </ion-grid>
+</ion-content>
+ 
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="10">
+        <ion-textarea autoGrow="true" class="message-input" rows="1" maxLength="500" [(ngModel)]="newMsg" >
+        </ion-textarea>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''"
+          class="msg-btn" (click)="sendMessage()">
+          <ion-icon name="send" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

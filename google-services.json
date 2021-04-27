@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "664977757821",
+    "project_id": "bertshinnovation-chat",
+    "storage_bucket": "bertshinnovation-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664977757821:android:3c721792a6b7802a150314",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664977757821-pkg0ln3eol41p0eleb2i9h71mejdlqkf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9c14VmeUxRHVq2ewJkLQdw9WVKlMRclQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664977757821-pkg0ln3eol41p0eleb2i9h71mejdlqkf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

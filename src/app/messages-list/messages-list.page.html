@@ -1,0 +1,28 @@
+<ion-header>
+  
+   <ion-toolbar class="toolbar" >
+    <div class="card-content-2">
+      <img src={{connectedUser.photo}}>
+      <p style="color: rgb(0, 0, 0); font-family: Roboto;">Messages</p>
+    </div>
+    <ion-searchbar style="--border-radius: 15px; --background:rgb(255, 254, 254);" #search showCancelButton="focus" debounce="500" (ionChange)="ionChange($event)"></ion-searchbar>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  >
+  
+  <ion-list  class="card-style" *ngFor="let user of searchedItem" >
+    <p style="float: right;margin-top: 30px;font-size: 10px;">{{user.lastMessage !== null && user.lastMessage !== undefined && user.lastMessage.createdAt?.toMillis() | date:'short'}}</p>
+    <div class="card-content" (click)="displayMessages(user)" >
+      <img src={{user.photo}}>
+      <ion-label>
+        <h2>{{user.firstName +" "+user.lastName}}</h2> 
+        <p style="margin-left: 15px;">{{user.lastMessage !== null && user.lastMessage !== undefined && user.lastMessage.from === user.uid ? '':'You :' }}{{user.lastMessage !== null && user.lastMessage !== undefined ? user.lastMessage.msg : 'Loading...'}} </p>
+    <!--<p style="margin-left: 15px;">{{user.lastMessage !== null && user.lastMessage !== undefined && user.lastMessage.isSeen ? 'Seen':'Not seen' }}</p> -->
+
+      </ion-label>
+            
+    </div>
+</ion-list>
+</ion-content>

@@ -1,0 +1,236 @@
+.title-style{
+    margin-top: 25px; 
+    font-size: 15px;
+    margin: 10px;
+    font-weight: bold;
+    font-family: Roboto;
+    color: black;
+}
+.card-style{
+  background-color: rgb(56, 56, 55);
+  height:80px;
+  width: 94%;
+  border-radius: 15px;
+  margin-left: 10px;
+  box-shadow: 6px 6px 2px 1px rgb(211, 208, 208);
+  margin-bottom: 10px;
+  
+}
+
+.work-status-bg{
+  background-color:#f88111;
+
+  border-radius: 20px;
+  color: rgb(255, 255, 255);
+  font-family: Roboto;
+  margin-top: 15px;
+  font-size: 12px ;
+  margin-right: 15px;
+  width: 45px;
+  padding-left: 10px;
+  padding-top: 1.2px;
+  height: 18px;
+  float: right;}
+
+.leave-status-bg{
+  background-color:rgba(56, 62, 86, 1);
+  
+  border-radius: 20px;
+  color: rgb(255, 255, 255);
+  font-family: Roboto;
+  margin-top: 15px;
+  font-size: 12px ;
+  margin-right: 10px;
+  width: 56px;
+  padding-left: 8px;
+  padding-top: 3px;
+  height: 21px;
+  float: right;}
+
+.card-content{
+   
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  img{
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border-color: white;
+  }
+  h2{
+      font-weight: 300;
+      color: #fff;
+      margin-left: 15px;
+  }
+  p{
+      font-size: 12px;
+      color: #e4e4e4;
+      font-weight: 100;
+      letter-spacing: 0.4px;
+      margin-left: 15px;
+  }
+}
+
+.title-style-normal{
+  margin-top: 25px; 
+  font-size: 15px;
+  margin: 10px;
+  font-family: Roboto;
+  color: black;
+}
+.normal-text{
+    font-family: Roboto;
+    color: black;
+    
+}
+ .arrow-style{
+    font-size: 1.2rem;
+    color: black;
+    float: right;
+    margin-top: -18px;
+    transition: .5s ease all;
+    &.expanded {
+      transform: rotate(90deg);
+    }
+}
+
+.card-header {
+  display: flex;
+  padding: 25px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+
+  p {
+    margin: auto;
+    margin-left: 0;
+  }
+
+  .arrow-style {
+    margin: auto;
+    margin-right: 0;
+  }
+}
+
+.card-body {
+  display: none;
+  animation: fade .5s ease;
+
+  &.display {
+    display: block;
+  }
+}
+
+.padding-0 {
+  padding: 0
+}
+
+.padding-expanded{
+  padding-left: unset;
+    padding-right: unset;
+    -webkit-padding-start: 16px;
+    padding-inline-start: 16px;
+    -webkit-padding-end: 16px;
+    padding-inline-end: 16px;
+}
+    .header-card-style{
+    
+        display: flex;
+        align-items: center;
+        height: 120px;
+        border-radius: 30px;
+        box-shadow: 10px 10px 10px #aaaaaa;
+        background: linear-gradient(rgba(240, 165, 0, 0.8), rgba(240, 165, 0, 0.8));
+          box-shadow: 0 8px 20px 0 rgba(244, 209, 96, 0.5), 0 2px 4px 0 rgba(244, 209, 96, 0.5);
+          background: linear-gradient(rgb(255, 154, 2), rgb(240, 136, 0));
+          box-shadow: 0 -3px 14px 0 rgb(244,209,96), 0 3px 9px 0 rgb(244,209,96);
+          background: #fa8a2f;
+        animation: fade-in 0.8s ease-in-out;
+       // animation-delay: 3s;
+        h1 {
+          font-weight: 300;
+          font-size: 16px;
+          color: #ffffff;
+          margin-left: 5px;
+
+        }
+        p{
+           margin-left: 5px;
+           color: #ffffff;
+           font-weight: bold;
+           font-size: 12px;
+           &.date {
+            background-color: rgba(56, 62, 86, 0.8) !important;
+            cursor: pointer;
+            text-align: center;
+            padding: 0.5px 11px !important;
+            border-radius: 20px !important;
+            color:white;
+            position: absolute;
+            top: 15px;
+            right: 18px;
+            font-size: 8px;
+            padding: 2px 8px;
+            background-color: #383e56;
+            &:hover {
+              background-color: rgba(56, 62, 86, 1) !important;
+            }
+           }
+        }
+
+        ion-toggle{
+          margin-left: 5px;
+           &.date {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 2px 8px;
+            --background-checked: #7a49a5;
+
+
+           }
+        }
+        img {
+          width: 70px;
+          height: 70px;
+          margin-left: 16px;
+          border-radius: 50%;
+          margin-right: 16px;
+        }
+    }
+
+    .toast-scheme{
+      color: white;
+      font-size: 15px;
+      font-family: Roboto;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .ion-padding {
+      animation: fade 1s ease-in-out;
+    }
+
+    @keyframes fade-in{
+      0% {
+        transform: translateY(-400px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade{
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    
+
+

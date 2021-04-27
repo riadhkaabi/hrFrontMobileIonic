@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "bertshinnovation-chat": {
+      "hosting": {
+        "app": [
+          "bertshinnovation-chat"
+        ]
+      }
+    }
+  }
+}

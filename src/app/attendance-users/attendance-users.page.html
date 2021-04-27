@@ -1,0 +1,70 @@
+
+
+<ion-content style="--ion-background-color:#f5f4f4;margin-top: -2px;">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngFor="let item of items">
+    <ion-card class="header-card-style" style="--ion-background-color:#ffffff; padding: 0 10px;">
+  
+        <ion-label style=" margin-top: 2.5%;" >
+  
+          <div style="padding-bottom: 7.5px;
+          border-bottom: 1px solid rgba(255,255,255, 0.8);
+          margin-left: 5px;">
+            <p style=" font-size: 16px;
+            text-transform: capitalize;
+            margin-left: 0;">Today's Attendance</p>
+            
+            <h1 style="margin-left: 0; font-size: 13px;">Here , you can check employees' daily attendance</h1>
+          </div>
+          <ion-row>
+            
+            <p style="margin-top: 15px; margin-top: 1.5px;
+            font-weight: unset; font-size: 11px;">Search and filter results </p>
+            <ion-icon  name="chevron-forward-outline"  [ngClass]="(item.expanded ? 'arrow-style expanded' : 'arrow-style')"  (click)="expandItem(item)"></ion-icon> 
+
+
+          </ion-row>
+            
+         
+  
+          <p class="date">{{today}}</p>
+        </ion-label>
+  
+        
+    </ion-card>
+
+    <app-expandable expandheight="100px" [expanded]="item.expanded">
+      <ion-searchbar style="--ion-background-color:#e9e6e6;" #search showCancelButton="focus" debounce="500" (ionChange)="ionChange($event)"></ion-searchbar>
+
+      <p>
+        <ion-chip style="border-color: rgb(153, 153, 153);width: 30%;justify-content: center;" (click)="getAllAttendace()"  color="warning">
+          <ion-label >All</ion-label>
+        </ion-chip>
+        <ion-chip style="border-color: white;border: 0.3 solid;width: 30%;justify-content: center;"(click)="getByToday()"  color="warning">
+          <ion-label >Today</ion-label>
+        </ion-chip>
+        <ion-chip style="border-color: white;width: 30%;justify-content: center;" (click)="getByMonth()"  color="warning">
+          <ion-label>Month</ion-label>
+        </ion-chip>
+     </p>
+    </app-expandable>
+    </div>
+<ion-card  style="--ion-background-color:#f5f4f4;margin-top: -2px;">
+  
+<ion-list *ngFor="let attendance of searchedItem" >
+ 
+  <ion-card class="card-style">
+    <div class="card-content">
+      <img src={{attendance.photo}}>
+      <ion-label >
+        <h2>{{attendance.firstName+" "+attendance.lastName}}</h2>
+        <p>{{attendance.punchTime | date: 'dd/MM/y, H:mm:ss '}}</p>
+      </ion-label>
+    </div>
+    <div [ngClass]="(attendance.workState === 1)?'work-status-bg':'leave-status-bg'">{{attendance.workState === 1 ? 'Entry' : 'Leaving'}}</div>
+  </ion-card>
+  </ion-list>
+</ion-card>
+</ion-content>

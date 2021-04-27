@@ -1,0 +1,17 @@
+.btn-style{
+        display: flex;
+        align-items: center;
+        --border-radius: 30px;
+        --box-shadow: 10px 10px 10px #aaaaaa;
+        --background: linear-gradient(rgba(240, 165, 0, 0.8), rgba(240, 165, 0, 0.8));
+        --box-shadow: 0 8px 20px 0 rgba(244, 209, 96, 0.5), 0 2px 4px 0 rgba(244, 209, 96, 0.5);
+        --background: linear-gradient(rgb(238, 163, 0), rgba(240, 165, 0,1));
+        --box-shadow: 0 -3px 14px 0 rgb(244 209 96), 0 3px 9px 0 rgb(244 209 96);
+        --background: rgba(238,181,9,0.6);
+        --animation: fade-in 0.8s ease-in-out;
+       // animation-delay: 3s;
+        
+        
+      
+        
+}

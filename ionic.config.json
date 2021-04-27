@@ -1,0 +1,8 @@
+{
+  "name": "BertschInnovationMobileApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+
+}

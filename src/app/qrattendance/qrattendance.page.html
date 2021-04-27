@@ -1,0 +1,40 @@
+
+ 
+<ion-content style="--ion-background-color:#f0f0f0;--ion-border-radius: 20px;">
+  <!-- Fallback for iOS PWA -->
+  <input #fileinput type="file" accept="image/*;capture=camera" hidden (change)="handleFile($event.target.files)">
+ 
+  <div style="height: 10%; background-color:primary;">
+
+  </div>
+  
+ 
+  <ion-button expand="full" (click)="reset()" color="warning" *ngIf="scanResult">
+    <ion-icon slot="start" name="refresh"></ion-icon>
+    Reset
+  </ion-button>
+ 
+  <!-- Shows our camera stream -->
+  <ion-card style="margin-top: -50px;">
+  <video  #video [hidden]="!scanActive" width="100%"></video>
+  </ion-card>
+  <!-- Used to render the camera stream images -->
+  <canvas #canvas hidden></canvas>
+ 
+  <!-- Stop our scanner preview if active -->
+  <ion-button expand="full" (click)="stopScan()"  class="btn-style" *ngIf="scanActive">
+    <ion-icon slot="start" name="close"></ion-icon>
+    Stop scan
+  </ion-button>
+ 
+  <ion-card style="margin-top: 65px;" *ngIf="scanResult">
+    <ion-card-header>
+      <ion-card-title>Access Confirmed</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      You registered at{{" "+tt}}
+      
+    </ion-card-content>
+  </ion-card>
+ 
+</ion-content>

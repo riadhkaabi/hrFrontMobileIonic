@@ -1,0 +1,304 @@
+.card-style{
+    background-color: rgb(56, 56, 55);
+    height:80px;
+    width: 94%;
+    border-radius: 15px;
+    margin-left: 10px;
+    box-shadow: 6px 6px 2px 1px rgb(211, 208, 208);
+    margin-bottom: 10px;
+    
+}
+.card-header {
+    display: flex;
+    padding: 25px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+  
+    p {
+      margin: auto;
+      margin-left: 0;
+    }
+  
+    .arrow-style {
+      margin: auto;
+      margin-right: 0;
+    }
+  }
+  
+  .card-body {
+    display: none;
+    animation: fade .5s ease;
+  
+    &.display {
+      display: block;
+    }
+  }
+  
+  .padding-0 {
+    padding: 0
+  }
+  
+  .padding-expanded{
+    padding-left: unset;
+      padding-right: unset;
+      -webkit-padding-start: 16px;
+      padding-inline-start: 16px;
+      -webkit-padding-end: 16px;
+      padding-inline-end: 16px;
+  }
+      .header-card-style{
+      
+          display: flex;
+          align-items: center;
+          height: 100px;
+          border-radius: 15px;
+          box-shadow: 10px 10px 10px #aaaaaa;
+          background: linear-gradient(rgba(240, 165, 0, 0.8), rgba(240, 165, 0, 0.8));
+          box-shadow: 0 8px 20px 0 rgba(244, 209, 96, 0.5), 0 2px 4px 0 rgba(244, 209, 96, 0.5);
+          background: linear-gradient(rgb(255, 154, 2), rgb(240, 136, 0));
+          box-shadow: 0 -3px 14px 0 rgb(244,209,96), 0 3px 9px 0 rgb(244,209,96);
+          background: #fa8a2f;
+          animation: fade-in 0.8s ease-in-out;
+         // animation-delay: 3s;
+          h1 {
+            font-weight: 300;
+            font-size: 16px;
+            color: #ffffff;
+            margin-left: 5px;
+  
+          }
+          p{
+             margin-left: 5px;
+             color: #ffffff;
+             font-weight: bold;
+             font-size: 12px;
+             &.date {
+              background-color: rgba(56, 62, 86, 0.8) !important;
+              cursor: pointer;
+              text-align: center;
+              padding: 0.5px 11px !important;
+              border-radius: 20px !important;
+              color:white;
+              position: absolute;
+              top: 15px;
+              right: 18px;
+              font-size: 8px;
+              padding: 2px 8px;
+              background-color: #383e56;
+              &:hover {
+                background-color: rgba(56, 62, 86, 1) !important;
+              }
+             }
+          }
+          img {
+            width: 70px;
+            height: 70px;
+            margin-left: 16px;
+            border-radius: 50%;
+            margin-right: 16px;
+          }
+         
+          
+      }
+  
+      .toast-scheme{
+        color: white;
+        font-size: 15px;
+        font-family: Roboto;
+        font-weight: bold;
+        text-align: center;
+      }
+  
+      .ion-padding {
+        animation: fade 1s ease-in-out;
+      }
+  
+      @keyframes fade-in{
+        0% {
+          transform: translateY(-400px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+  
+      @keyframes fade{
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+.card-content{
+   
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+    img{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border-color: white;
+    }
+    h2{
+        font-weight: 300;
+        color: #fff;
+        margin-left: 15px;
+    }
+    p{
+        font-size: 12px;
+        color: #e4e4e4;
+        font-weight: 100;
+        letter-spacing: 0.4px;
+        margin-left: 15px;
+    }
+}
+.card-info{
+    position: absolute;
+    top: 85px;
+    left: 15px;
+    display: flex;
+    h2{
+        font-weight: 300;
+        color: #fff;
+        margin-left: 15px;
+    }
+    p{
+        font-size: 12px;
+        color: #e4e4e4;
+        font-weight: 100;
+        letter-spacing: 0.4px;
+        margin-left: 15px;
+    }
+}
+.card-info-to{
+    position: absolute;
+    top: 110px;
+    left: 185px;
+    display: flex;
+    h2{
+        font-weight: 300;
+        color: #fff;
+        margin-left: 15px;
+    }
+    p{
+        font-size: 12px;
+        color: #e4e4e4;
+        font-weight: 100;
+        letter-spacing: 0.4px;
+        margin-left: 15px;
+
+    }
+          
+}
+
+.normal-text{
+    font-family: Roboto;
+}
+.work-status-bg{
+    background-color:#f88111;
+
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    font-family: Roboto;
+    margin-top: 15px;
+    font-size: 12px ;
+    margin-right: 15px;
+    width: 45px;
+    padding-left: 10px;
+    padding-top: 1.2px;
+    height: 18px;
+    float: right;}
+
+.leave-status-bg{
+    background-color:rgba(56, 62, 86, 1);
+    
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    font-family: Roboto;
+    margin-top: 15px;
+    font-size: 12px ;
+    margin-right: 10px;
+    width: 56px;
+    padding-left: 8px;
+    padding-top: 3px;
+    height: 21px;
+    float: right;}
+
+.btn-card{
+    font-family: Roboto;
+    font-size: 15px;
+    margin-left: 165px;
+    border-radius: 15px;
+    height: 35px;
+    margin-right: -60px;
+    margin-top: 45px;
+    color: white;
+}
+.btn-card-match{
+    font-family: Roboto;
+    font-size: 15px;
+    margin-left: 165px;
+    border-radius: 15px;
+    height: 33px;
+    width: 149px;
+    margin-right: -60px;
+    margin-top: 5px;
+    color: white;
+}
+.add_user_div{
+    height: 40%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    border-radius: 30px;
+    
+}
+.input-underline {
+    margin-top: 20px;
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    color: black;
+    border-radius: 0;
+    text-emphasis-color: black;
+    font-family: Roboto;
+    }
+  #form {
+    margin-top: 10%;
+    padding-left: 30px;
+    padding-right: 30px;
+  
+  }
+  .ion-btn {
+  
+    margin-top: 25px;
+    height: 48px;
+    font-size: 18px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 20px;
+  }
+  .ion-btn:hover,
+  .ion-btn:focus,
+  .ion-btn:active,
+  .ion-btn:visited {
+    color: rgba(255, 255, 255, 1);
+    border: 2px solid rgba(255, 255, 255, 1);
+    outline: none;
+  }
+  .arrow-style{
+
+    margin-top: 4px;margin-left: 180px;color: white;
+    &.expanded {
+        transform: rotate(90deg);
+      }
+}

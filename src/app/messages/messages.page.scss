@@ -1,0 +1,72 @@
+.message-input {
+    width: 100%;
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 6px;
+    background: #fff;
+    resize: none;
+    margin-top: 0px;
+    --padding-start: 8px;
+}
+ 
+.message {
+    padding: 10px !important;
+    border-radius: 10px !important;
+    margin-bottom: 4px !important;
+    white-space: pre-wrap;
+}
+ 
+.my-message {
+    background: #FB6205;
+    color: #fff;
+}
+ 
+.other-message {
+    background: #b6b5b5;
+    color: rgb(255, 255, 255);
+}
+ 
+.time {
+    color: #dfdfdf;
+    float: right;
+    font-size: small;
+}
+.toolbar{
+    height: 55px;
+}
+.card-content-2{
+    display: flex;
+    align-items: center;
+    img{
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border-color: white;
+    }
+    h2{
+        font-weight: 300;
+        color: black;
+        margin-left: 15px;
+    }
+    p{
+        font-size: 18px;
+        color: black;
+        font-weight: bold;
+        letter-spacing: 0.4px;
+        margin-left: 8px;
+    }
+    
+}
+
+.card-content{
+    margin-right: 6px;
+    float: left;
+    margin-left: -12px;
+     img{
+         width: 35px;
+         height: 35px;
+         border-radius: 50%;
+         border-color: white;
+     }
+    
+     
+ }

@@ -1,0 +1,186 @@
+.card-style{
+    background-color: rgb(77, 75, 75);
+    height: 200px;
+    width: 320px;
+    border-radius: 15px;
+    margin-left: 10px;
+    box-shadow: 6px 6px 2px 1px rgb(211, 208, 208);
+    margin-bottom: 10px;
+    
+}
+.card-content{
+   
+    position: absolute;
+    top: 10px;
+    left: 18px;
+    display: flex;
+    align-items: center;
+    img{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border-color: white;
+    }
+    h2{
+        font-weight: 300;
+        color: #fff;
+        margin-left: 15px;
+    }
+    p{
+        font-size: 12px;
+        color: #e4e4e4;
+        font-weight: 100;
+        letter-spacing: 0.4px;
+        margin-left: 15px;
+    }
+}
+.card-info{
+    position: absolute;
+    left: 10px;
+    top: 80px;
+    display: flex;
+    h2{
+        font-weight: 300;
+        color: #fff;
+        margin-left: 15px;
+    }
+    p{
+        font-size: 12px;
+        color: #e4e4e4;
+        font-weight: 100;
+        letter-spacing: 0.4px;
+        margin-left: 15px;
+    }
+}
+.card-info-to{
+    position: absolute;
+    top: 110px;
+    left: 185px;
+    display: flex;
+    h2{
+        font-weight: 300;
+        color: #fff;
+        margin-left: 15px;
+    }
+    p{
+        font-size: 12px;
+        color: #e4e4e4;
+        font-weight: 100;
+        letter-spacing: 0.4px;
+        margin-left: 15px;
+
+    }
+          
+}
+.update-style{
+    color: black;
+    font-size: 1.8rem;
+    float : right;
+    margin-right: 10px;
+    margin-top: -28px;
+
+}
+.normal-text{
+    font-family: Roboto;
+}
+.holiday-status-bg{
+    background-color:rgb(187, 187, 187);
+    border-radius: 5px;
+    color: black;
+    font-family: Roboto;
+    float: right;
+    size: 7px;
+    font-size: 12px;
+    width: 67px;
+    height: 17px;
+    padding-left: 8px;
+    margin-left: 125px;
+    position: absolute;
+    margin-top: -20px;
+    color: white;
+    padding-top: 2px;
+}
+.work-status-bg{
+    background-color:rgb(253, 125, 5);
+    border-radius: 5px;
+    color: black;
+    font-family: Roboto;
+    float: right;
+    size: 7px;
+    font-size: 12px;
+    width: 67px;
+    height: 17px;
+    padding-left: 11px;
+    margin-left: 125px;
+    position: absolute;
+    margin-top: -20px;
+    color: white;
+    padding-top: 1px;
+}
+.btn-card{
+    font-family: Roboto;
+    font-size: 12px;
+    margin-left: 185px;
+    border-radius: 15px;
+    height: 35px;
+    width: 120px;
+    margin-right: -60px;
+    margin-top: 45px;
+    color: white;
+}
+.btn-card-match{
+    font-family: Roboto;
+    font-size: 12px;
+    margin-left: 185px;
+    border-radius: 15px;
+    height: 33px;
+    width: 120px;
+    margin-right: -60px;
+    margin-top: 5px;
+    color: white;
+}
+.add_user_div{
+    height: 40%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    border-radius: 30px;
+    
+}
+.input-underline {
+    margin-top: 20px;
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    color: black;
+    border-radius: 0;
+    text-emphasis-color: black;
+    font-family: Roboto;
+    }
+  #form {
+    margin-top: 10%;
+    padding-left: 30px;
+    padding-right: 30px;
+  
+  }
+  .ion-btn {
+  
+    margin-top: 25px;
+    height: 48px;
+    font-size: 18px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 20px;
+  }
+  .ion-btn:hover,
+  .ion-btn:focus,
+  .ion-btn:active,
+  .ion-btn:visited {
+    color: rgba(255, 255, 255, 1);
+    border: 2px solid rgba(255, 255, 255, 1);
+    outline: none;
+  }

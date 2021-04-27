@@ -1,0 +1,47 @@
+
+
+<ion-content style="--ion-background-color:#f5f4f4;margin-top: -2px;">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+    <ion-card  class="header-card-style" style="--ion-background-color:#ffffff; padding: 0 10px;">
+      <img (click)="displayActionSheet()" src="{{currentUser.photo}}"/>
+  
+        <ion-label style=" margin-top: 2.5%;" >
+          <div style="padding-bottom: 7.5px;
+          border-bottom: 1px solid rgba(255,255,255, 0.8);
+          margin-left: 5px;">
+            <p  style=" font-size: 16px;
+            text-transform: capitalize;
+            margin-left: 0;">{{currentUser.firstName+" "+currentUser.lastName}}</p>
+            <h1 style="margin-left: 0; font-size: 14px;">Welcome to BertschInnovation</h1>
+          </div>
+            <p  style="margin-top: 15px; margin-top: 1.5px;
+            font-weight: unset; font-size: 11px;">Official work time is from <b>08:00</b> to <b>17:00</b></p>
+            <ion-toggle class="date" name="banana" color="warning" [checked]="currentUser.holidayState === 1 ? false : true" (click)="currentUser.holidayState === 1 ? disableHoliday() : activateHoliday() " ></ion-toggle>
+        </ion-label>
+    </ion-card>
+
+    
+<ion-card  style="--ion-background-color:#f5f4f4;margin-top: -2px;">
+  
+<ion-list *ngFor="let attendance of myAttendanceList" >
+ 
+  <ion-card class="card-style">
+    <div class="card-content">
+      <img src={{currentUser.photo}}>
+      <ion-label >
+        <h2>{{currentUser.firstName+" "+currentUser.lastName}}</h2>
+        <p>{{attendance.punchTime | date: 'dd/MM/y, H:mm:ss '}}</p>
+      </ion-label>
+    </div>
+    <div [ngClass]="(attendance.workstate === 1)?'work-status-bg':'leave-status-bg'">{{attendance.workstate === 1 ? 'Entry' : 'Leaving'}}</div>
+  </ion-card>
+  </ion-list>
+</ion-card>
+</ion-content>
+<div *ngIf="showUser == true">
+  <ion-fab-button   style="margin-right: 15px; position: absolute ; right:0;bottom:0;margin-bottom: 10px;--background :black"  (click)="openMyModalQrScanner()">
+  <ion-icon color="light" name="qr-code-outline"></ion-icon>
+</ion-fab-button>
+</div>

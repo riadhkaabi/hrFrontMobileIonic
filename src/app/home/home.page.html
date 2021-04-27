@@ -1,0 +1,37 @@
+<ion-content>
+this is homepage
+</ion-content>
+ <ion-menu side="start" menuId="first" contentId="content1">
+        <ion-header>
+        </ion-header>
+          <ion-content>
+            <div class="menu-header-bg"></div>
+            <div class="header-content" >
+              <img src={{currentUser.photo}}>
+              <ion-label >
+                <h2 style="text-transform: lowercase; text-transform: capitalize;">{{currentUser.firstName+" "+currentUser.lastName}}</h2>
+                <p>Mobile developer</p>
+              </ion-label>
+            </div>
+            
+
+            <ion-list lines="none" class="menu-items" *ngFor="let pages of navigate">
+              <ion-menu-toggle auto-hide="true" >
+              <ion-item class="highlight" [class.highlight]="pages == 1"  [routerLink]="pages.url" routerDirection="forward">
+                <ion-icon [name]="pages.icon"></ion-icon>{{pages.title}}
+              </ion-item>
+            </ion-menu-toggle>
+            
+            </ion-list>
+            
+            <ion-item style="margin-left: 6%;" lines="none" class="menu-items" (click)="logout()">
+              <ion-icon name="exit-outline"></ion-icon> Log Out
+            </ion-item>
+          </ion-content>
+    </ion-menu>
+
+<ion-router-outlet id="content1"></ion-router-outlet>
+
+
+
+    
