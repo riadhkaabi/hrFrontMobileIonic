@@ -1,5 +1,3 @@
-
-
 <ion-content style="--ion-background-color:#f5f4f4;margin-top: -2px;">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -22,9 +20,12 @@
         </ion-label>
     </ion-card>
 
-    
+    <div *ngIf="nullAttendace == true" style="margin-top: 160px;text-align: center;">
+      <ion-text style="color: rgb(182, 179, 179);font-size: 30px;font-family: ROBOTO;">No attendances available</ion-text>
+
+    </div>
 <ion-card  style="--ion-background-color:#f5f4f4;margin-top: -2px;">
-  
+
 <ion-list *ngFor="let attendance of myAttendanceList" >
  
   <ion-card class="card-style">

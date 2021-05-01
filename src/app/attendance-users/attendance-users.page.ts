@@ -1,13 +1,9 @@
 import { JsonpClientBackend } from '@angular/common/http';
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, IonRouterOutlet, IonSearchbar, ModalController, ToastController } from '@ionic/angular';
-import { AddUserComponent } from '../add-user/add-user.component';
-import { SendTokenComponent } from '../send-token/send-token.component';
 import { AttendanceService } from '../Services/attendance.service';
-import { SharedService } from '../Services/shared.service';
 import { UserService } from '../Services/user.service';
 @Component({
   selector: 'app-attendance-users',

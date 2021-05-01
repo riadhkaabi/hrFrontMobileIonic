@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { async } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { ActionSheetController, IonToggle, ModalController } from '@ionic/angular';
 import { QrattendancePage } from '../qrattendance/qrattendance.page';
 import { AttendanceService } from '../Services/attendance.service';
@@ -21,9 +22,10 @@ export class ProfilePage implements OnInit {
   holidayState:boolean
   showUser:boolean
   admin: Boolean = this.sharedService.verifyAdmin();
+  nullAttendace:boolean 
 
 
-  constructor(private authService : AuthenticationService ,public actionSheetController: ActionSheetController,private modalController:ModalController,private userService:UserService, private employeeService: EmployeeService ,private attendanceSerice : AttendanceService,
+  constructor(private router: Router,private authService : AuthenticationService ,public actionSheetController: ActionSheetController,private modalController:ModalController,private userService:UserService, private employeeService: EmployeeService ,private attendanceSerice : AttendanceService,
      public sharedService: SharedService) { 
     this.currentUser = AppSettings.details;
     this.today = new Date().toISOString().slice(0, 10)
@@ -36,7 +38,10 @@ export class ProfilePage implements OnInit {
     }
     this.currentUser = AppSettings.details;
     this.getMyAttendaces()
-  }
+    if (this.myAttendanceList.length == 0) {
+        this.nullAttendace = true
+    } else this.nullAttendace = false
+   }
 
   async displayActionSheet(){
 
@@ -48,13 +53,20 @@ export class ProfilePage implements OnInit {
         handler: () => {
           this.logOut();
         }
+      },{
+        text: 'Take a picture',
+        icon: 'picture',
+        handler: () => {
+           this.router.navigate(['/add-picture',this.currentUser.id]);
+          }
       }]
     });
     await actionSheet.present();
   }
-
+  
   doRefresh(event){
     console.log('Begin async operation');
+    this.currentUser = AppSettings.details;
     this.getMyAttendaces()
     setTimeout(() => {
       console.log('Async operation has ended');

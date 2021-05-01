@@ -13,7 +13,6 @@ import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { ChatService } from '../Services/chat.service';
-import {Deeplinks} from '@ionic-native/deeplinks/ngx'
 
 
 
@@ -35,7 +34,6 @@ export class LoginPage implements OnInit {
               private loadingController: LoadingController,
               private alertController: AlertController,
               private chatService: ChatService,
-              private deeplink:Deeplinks
               ) { }
   
   form: FormGroup = new FormGroup({

@@ -60,11 +60,12 @@ constructor(public navCtrl: NavController,private http: HttpClient,private userS
       fileKey: 'photo',
       fileName: '.png',
       chunkedMode: false,
+      params : {"id":this.userId}
       
      }
   
      console.log(this.realImage)
-     fileTransfer.upload(this.imgURL, 'http://192.168.1.63:80/upload.php', options).then((data) => {
+     fileTransfer.upload(this.imgURL, 'http://192.168.1.17:80/upload.php', options).then((data) => {
         // success
         console.log(data+"Uploaded Successfully")
         let res = data;
