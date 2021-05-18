@@ -64,5 +64,9 @@ export class UserService {
   public CheckHolidayNotActive(id: number) {
     return this.http.post(AppSettings.USER_URL + '/holidaystateNotActive/' + id,{});
   }
+  
+  public welcomePage(ip) {
+    return this.http.get(AppSettings.USER_URL + '/getbyIp/'+ip,{});
+  }
 
 }

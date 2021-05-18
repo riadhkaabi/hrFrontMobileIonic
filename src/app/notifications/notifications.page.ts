@@ -9,6 +9,7 @@ import {
 } from "@ionic/angular";
 import { NotificationdetailComponent } from "../notificationdetail/notificationdetail.component";
 import { NotificationService } from "../Services/notification.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-notifications",
@@ -17,22 +18,23 @@ import { NotificationService } from "../Services/notification.service";
 })
 export class NotificationsPage implements OnInit {
   myNotification: any = [];
-  notificationBadge: any = 0;
 
   stompClient = this.webSocketService.connect();
   constructor(
     private notificationService: NotificationService,
     private webSocketService: WebsocketService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private router:Router
   ) {}
 
   ngOnInit() {
     this.getNotification();
-    this.notificationBadge = +1;
-    console.log(this.notificationBadge);
+   //
+  
     this.notificationService.getNotifsByUser().subscribe((data) => {
       data.forEach((element) => {
         this.myNotification.push(element);
+       
       });
     });
   }
@@ -54,23 +56,32 @@ export class NotificationsPage implements OnInit {
       { user: AppSettings.details.username.toString() },
       function (frame) {
         that.stompClient.subscribe("/user/queue/reply", function (message) {
-          let notifId = JSON.parse(message.body).idNotification
-          let index = that.myNotification.findIndex(x => x.idNotification === notifId);
-          let result = that.myNotification.find(obj => {
+
+          if(message.body === "DELETED"){
+
+          }else{
+
+        let result = that.myNotification.find(obj => {
             return obj.idNotification === JSON.parse(message.body).idNotification
           })
+        
           if(result === undefined ){
             that.myNotification.push(JSON.parse(message.body));
-          }else{
+       
+          }
+          else{
             var foundIndex = that.myNotification.findIndex(item => item.idNotification == result.idNotification);
             that.myNotification[foundIndex].seen = 1
             that.myNotification[foundIndex] = JSON.parse(message.body)
           }
+          }
+          
+
          
         });
       }
     );
-    console.log(this.notificationBadge);
+
   }
 
   
@@ -90,5 +101,7 @@ export class NotificationsPage implements OnInit {
     this.notificationService.updateNotification(notificationToUpdate.idNotification,AppSettings.details.id).subscribe((data: any) =>{
         console.log(data)
     })
+    this.router.navigate(['/options/home/conge']) ;
+
   }
 }

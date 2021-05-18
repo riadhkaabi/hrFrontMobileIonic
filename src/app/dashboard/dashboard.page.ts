@@ -6,7 +6,7 @@ import { Chart } from "chart.js";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { SharedService } from "../Services/shared.service";
 import { AppSettings } from "../Settings/AppSettings";
-import { ModalController, ToastController } from "@ionic/angular";
+import { LoadingController, ModalController, ToastController } from "@ionic/angular";
 import { QrattendancePage } from "../qrattendance/qrattendance.page";
 
 @Component({
@@ -56,6 +56,7 @@ export class DashboardPage implements OnInit {
   workStart: any;
   workEnd: any;
   exportColumns: any[];
+  empInTime:any
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,7 +65,9 @@ export class DashboardPage implements OnInit {
     private statService: StatServiceService,
     private sharedService: SharedService,
     public toastController: ToastController,
-    private modalController: ModalController
+    private modalController: ModalController, 
+    private loadingController: LoadingController,
+
   ) {
     this.items = [{ expanded: false }];
     this.its = [{ expanded: false }];
@@ -95,9 +98,13 @@ export class DashboardPage implements OnInit {
       });
     });
 
+    
     this.statService.fetchStatsAttendance().subscribe((data: any) => {
-      //this.nbDelays = data.Delays;
+      this.nbDelays = data.Delays;
+      this.empInTime = data.Intime
       console.log("delays", this.nbDelays);
+      console.log("InTime", this.empInTime);
+
       this.doughnutChart2 = new Chart(this.doughnutCanvas2.nativeElement, {
         type: "doughnut",
         data: {
@@ -153,6 +160,8 @@ export class DashboardPage implements OnInit {
 
   async setTime() {
     if (this.timeForm.valid) {
+      const loading = await this.loadingController.create();
+
       this.start = new Date(this.timeForm.value.fromTime);
       var myTimeStart = this.start.getHours() + ":" + this.start.getMinutes();
       console.log(myTimeStart);
@@ -163,9 +172,20 @@ export class DashboardPage implements OnInit {
       if (this.end.getHours() > this.start.getHours()) {
         this.attendanceSerice
           .setWorkTime(myTimeStart, myTimeEnd)
-          .subscribe((data) => {
+          .subscribe(async (data) => {
+            this.workStart = myTimeStart
+            this.workEnd = myTimeEnd
+            loading.present();
             console.log(data);
+            loading.dismiss();
+            const toast = await this.toastController.create({
+              message: "Time Updated !",
+              duration: 2000,
+              cssClass: "toast-scheme",
+            });
+            toast.present();
           });
+
       } else {
         const toast = await this.toastController.create({
           message: "Choose time correctly !",
@@ -210,7 +230,9 @@ export class DashboardPage implements OnInit {
             this.employeeDetails = element;
 
             const data = [this.employeeDetails.nbDelay, 0];
+            console.log("DELAYS BARCHARt",this.employeeDetails.nbDelay)
             const data1 = [this.employeeDetails.presence, 0];
+            console.log("DELAYS BARCHARt",this.employeeDetails.presence)
             const data2 = [this.employeeDetails.extraHours, 0];
             this.barChart = new Chart(this.barchartCanvas.nativeElement, {
 
@@ -261,9 +283,10 @@ export class DashboardPage implements OnInit {
     this.showDiagram = true;
   }
 
-  getEmployees() {
-    this.employeeService.getEmployee().subscribe((data) => {
-      this.employeesList = data;
+   getEmployees() {
+  
+    this.employeeService.getEmployee().subscribe(async (data) => {
+       this.employeesList = data;
       console.log(this.employeesList);
     });
   }
@@ -272,6 +295,7 @@ getWorkTime(){
   this.attendanceSerice.getWorkTime().subscribe(data =>{
     this.workStart = data['timetableStart'].substring(11,16)
     this.workEnd = data['timetableEnd'].substring(11,16)
+   
     console.log("Work Time Start",data['timetableStart'].substring(11,16))
     console.log("Work Time End",data['timetableEnd'].substring(11,16))
 
@@ -279,6 +303,60 @@ getWorkTime(){
   })
 }
 
+doRefresh(event){
+  console.log('Begin async operation');
+  this.statService.fetchStatsAttendance().subscribe((data: any) => {
+    this.nbDelays = data.Delays;
+    this.empInTime = data.Intime
+    console.log("delays", this.nbDelays);
+    console.log("InTime", this.empInTime);
+
+    this.doughnutChart2 = new Chart(this.doughnutCanvas2.nativeElement, {
+      type: "doughnut",
+      data: {
+        labels: ["In Time", "Delay"],
+        datasets: [
+          {
+            data: [data.Intime, data.Delays],
+            backgroundColor: ["#f56d1f", "#000000"],
+            hoverBackgroundColor: ["#f56d1f", "#000000"],
+          },
+        ],
+      },
+    });
+  });  
+
+
+
+  this.employeeService.count().subscribe((data: any) => {
+    this.nbEmp = data;
+    console.log("test", this.nbEmp);
+  });
+  this.attendanceSerice.count().subscribe((data: any) => {
+    this.empIn = data;
+    console.log("nbIn", this.empIn);
+
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+      type: "doughnut",
+      data: {
+        labels: ["Attendance", "Absence"],
+        datasets: [
+          {
+            data: [this.empIn, this.nbEmp - this.empIn],
+            backgroundColor: ["#f56d1f", "#000000"],
+            hoverBackgroundColor: ["#f56d1f", "#000000"],
+          },
+        ],
+      },
+    });
+  });
+
+  
+  setTimeout(() => {
+    console.log('Async operation has ended');
+    event.target.complete();
+  }, 2000);
+}
   async openMyModalQrScanner() {
     const myModal = await this.modalController.create({
       component: QrattendancePage,

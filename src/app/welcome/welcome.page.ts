@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../Services/user.service';
 
 @Component({
   selector: 'app-welcome',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomePage implements OnInit {
 
-  constructor() { }
+  constructor(private userService:UserService) { }
 
   ngOnInit() {
+  this.userService.welcomePage("192.168.1.15").subscribe(data =>{
+    console.log(data)
+  })
+
+  
   }
  
 }

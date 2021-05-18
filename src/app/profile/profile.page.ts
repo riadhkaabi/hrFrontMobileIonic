@@ -47,7 +47,7 @@ export class ProfilePage implements OnInit {
 
     const actionSheet = await this.actionSheetController.create({
       cssClass: 'my-custom-class',
-      buttons: [ {
+      buttons: [{
         text: 'Log out',
         icon: 'close',
         handler: () => {

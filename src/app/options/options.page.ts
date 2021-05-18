@@ -22,6 +22,7 @@ export class OptionsPage implements OnInit {
   ) {}
   myNotification: any = [];
   ngOnInit() {
+    this.getNotification();
     this.notificationService.getNotifsByUser().subscribe((data) => {
       data.forEach((element) => {
         this.myNotification.push(element);
@@ -45,21 +46,33 @@ export class OptionsPage implements OnInit {
       function (frame) {
         that.stompClient.subscribe("/user/queue/reply", function (message) {
 
-          let result = that.myNotification.find(
-            (obj) => {
-              return (
-                obj.idNotification === JSON.parse(message.body).idNotification
-              );
-            }
-          );
+
+          if(message.body === "DELETED"){
+            that.countMsg--;
+          }else{
+
+
+          let result = that.myNotification.find(obj => {
+            return obj.idNotification === JSON.parse(message.body).idNotification
+          })
+        
           if (result !== undefined) {
             var foundIndex = that.myNotification.findIndex(
               (item) => item.idNotification == result.idNotification
             );
             that.myNotification[foundIndex].seen = 1;
-            that.countMsg--;
+            if(that.countMsg>0){
+              that.countMsg--;
+            }
+         
             that.myNotification[foundIndex] = JSON.parse(message.body);
           }
+          else{
+
+            that.myNotification.push(JSON.parse(message.body));
+            that.countMsg++;
+          }
+        }
         });
       }
     );

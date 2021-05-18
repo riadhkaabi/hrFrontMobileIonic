@@ -1,7 +1,7 @@
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AlertController, IonRouterOutlet, IonSearchbar, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, IonRouterOutlet, IonSearchbar, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { SendTokenComponent } from '../send-token/send-token.component';
 import { EmployeeService } from '../Services/employee.service';
@@ -21,7 +21,8 @@ export class UsersListPage implements OnInit {
   employeeId : any
   admin: Boolean = this.sharedService.verifyAdmin();
 
-  constructor(public userService: UserService,private employeeService : EmployeeService, public alertController: AlertController , public toastController: ToastController ,private modalController:ModalController,public sharedService: SharedService) {
+  constructor(public userService: UserService,private employeeService : EmployeeService, public alertController: AlertController , public toastController: ToastController ,private modalController:ModalController,public sharedService: SharedService,private loadingController: LoadingController,
+    ) {
     this.items = [
       { expanded: false },
     ];
@@ -190,10 +191,19 @@ export class UsersListPage implements OnInit {
     await alert.present();
     }
  
-    matchingUser(id: number) {
+    async matchingUser(id: number) {
+      const loading = await this.loadingController.create();
+    await loading.present();
       console.log("matchingUserId "+this.employeeId) ;
-      this.userService.matchingUser(id, this.employeeId).subscribe(data=> {
+      this.userService.matchingUser(id, this.employeeId).subscribe(async data=> {
         console.log(data) ;
+        loading.dismiss();
+        const alert = await this.alertController.create({
+          message: "Matched successfully",
+          buttons: ['OK'],
+        });
+
+        await alert.present();
            }
       );
     }

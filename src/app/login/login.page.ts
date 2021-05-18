@@ -46,8 +46,10 @@ export class LoginPage implements OnInit {
   
   async onSubmit() {
     if (this.form.valid) {
-    
+
       this.authService.authenticate(this.form.controls.username.value, this.form.controls.password.value).subscribe(data => {
+        console.log(data)
+
         localStorage.setItem('token', data.token) ;
         this.userService.details(this.form.controls.username.value).subscribe(user => {
           localStorage.setItem('user', JSON.stringify(user)) ;
@@ -69,10 +71,11 @@ export class LoginPage implements OnInit {
         },
         error => {
           this.error = error.message;
+             console.log(this.error)
         } );
       }
-      this.authService.fireBaseAuth();
-      this.signInToFirebase();
+      //this.authService.fireBaseAuth();
+      //this.signInToFirebase();
   }
 
   async signInToFirebase(){

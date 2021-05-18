@@ -1,5 +1,7 @@
 <ion-content class="has-header" overflow-scroll="false" has-bouncing="true" style="--ion-background-color:#f0f0f0;">
-  
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card class="header-card-style" style="--ion-background-color:#ffffff; padding: 0 10px;">
     <img src="assets/images/bertsch.png"/>
 
@@ -32,8 +34,12 @@
       <ion-card-header class="title-style-normal" style="text-align: center">
         <ion-icon style="font-size: 18px;" name="flash-outline"></ion-icon>
 
-        Presence Preview of <b>{{today}}</b>
-        Number of employees : <b>{{nbEmp}}</b>
+        <ion-text>Preview of <b>{{today}}</b></ion-text><br>
+        <ion-text > Number of employees : <b>{{nbEmp}}</b></ion-text><br>
+        <ion-text>Attendances : <b>{{empIn}}</b></ion-text> <br>
+        <ion-text>Absences : <b>{{nbEmp-empIn}}</b></ion-text>
+       
+
 
       </ion-card-header>
 
@@ -46,10 +52,16 @@
         <ion-icon style="font-size: 18px;" name="flash-outline"></ion-icon>
 
         Punctuality Preview of <b>{{" "+today}}</b>
+        <ion-text style="margin-top: 10px;"> In Time : <b>{{empInTime}}</b></ion-text><br>
+        <ion-text style="margin-top: 10px;">Delays : <b>{{nbDelays}}</b></ion-text> <br>
       </ion-card-header>
-      <ion-card-content>
-        <canvas #doughnutCanvas2></canvas>
+      
+      <ion-card-content >
+        <canvas  #doughnutCanvas2></canvas>
+        <ion-text *ngIf="nbDelays == 0  && empInTime == 0" style="color: rgb(182, 179, 179);font-size: 20px;font-family: ROBOTO;margin-left: 20px;">No Attendances yet Today</ion-text>
+
       </ion-card-content>
+
     </ion-card>
   </div>
 

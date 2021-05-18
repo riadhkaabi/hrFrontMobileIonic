@@ -6,6 +6,8 @@ import { File } from '@ionic-native/file/ngx';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { UserService } from '../Services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppSettings } from '../Settings/AppSettings';
+
 @Component({
   selector: 'app-add-picture',
   templateUrl: './add-picture.page.html',
@@ -15,11 +17,13 @@ export class AddPicturePage implements OnInit {
 imgURL :any 
 realImage:any
 userId:any
+currentUser:any
 constructor(public navCtrl: NavController,private http: HttpClient,private userService:UserService,
   private transfer: FileTransfer,private route: ActivatedRoute,private router: Router,
   private camera: Camera,
   public loadingCtrl: LoadingController,
   public toastCtrl: ToastController) { 
+    this.currentUser = AppSettings.details;
 
     this.route.params.subscribe(params => {
       this.userId=params['userId']
@@ -65,12 +69,16 @@ constructor(public navCtrl: NavController,private http: HttpClient,private userS
      }
   
      console.log(this.realImage)
-     fileTransfer.upload(this.imgURL, 'http://192.168.1.17:80/upload.php', options).then((data) => {
+     fileTransfer.upload(this.imgURL, 'http://'+AppSettings.IP_ADDRESS+':80/upload.php', options).then((data) => {
         // success
         console.log(data+"Uploaded Successfully")
         let res = data;
           if (res['success']) {
             console.log('True');
+            var updatedUser = {...this.currentUser}
+          updatedUser.photo=res
+          localStorage.setItem('user', JSON.stringify(updatedUser)) ;
+
           }
     alert("success");
   }, (err) => {
@@ -82,7 +90,4 @@ this.userService.uploadId(this.userId).subscribe(data =>{
   console.log(data);
 })
 }
-  
-
-
 }

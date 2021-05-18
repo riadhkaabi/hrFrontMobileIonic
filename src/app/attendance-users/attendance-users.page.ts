@@ -30,8 +30,6 @@ export class AttendanceUsersPage implements OnInit {
     
   }
   
-  
- 
   ionViewDidEnter() {
     setTimeout(() => {
       this.search.setFocus();
@@ -43,7 +41,6 @@ export class AttendanceUsersPage implements OnInit {
     this.searchedItem = this.attendanceList;
     if (val && val.trim() != '') {
       this.searchedItem = this.searchedItem.filter((item: any) => {
-        console.log(item.firstName)
         return (item.firstName.toLowerCase().indexOf(val.toLowerCase()) > -1 );
       })
     }
@@ -52,7 +49,6 @@ export class AttendanceUsersPage implements OnInit {
   doRefresh(event){
     console.log('Begin async operation');
     this.getByToday();
-    
     setTimeout(() => {
       console.log('Async operation has ended');
       event.target.complete();
@@ -70,22 +66,19 @@ export class AttendanceUsersPage implements OnInit {
         'lastName':element[1],
         'photo':element[2],
         'workState':element[3],
-        'punchTime':element[4]
+        'punchTime':new Date(new Date(element[4]).setHours(new Date(element[4]).getHours()-1))
       }
       this.attendanceList.push(item)
       this.searchedItem = this.attendanceList
-
        console.log(this.attendanceList)
      }
-    
-    }
-      );
+    });
   }
-
   
 getByToday() {
   this.attendanceList=[]
   this.attendanceSerice.getByToday().subscribe(data => {
+    console.log(data)
     for (let index = 0; index < data['length']; index++) {
       const element = data[index];
      let item={
@@ -93,11 +86,11 @@ getByToday() {
       'lastName':element[1],
       'photo':element[2],
       'workState':element[3],
-      'punchTime':element[4]
-     }
+      'punchTime':new Date(new Date(element[4]).setHours(new Date(element[4]).getHours()-1))
+    }
      this.attendanceList.push(item)
      this.searchedItem = this.attendanceList
-      console.log(this.attendanceList)
+      console.log(this.searchedItem)
 
     }  
   }) ;
@@ -112,10 +105,12 @@ getByMonth() {
       'lastName':element[1],
       'photo':element[2],
       'workState':element[3],
-      'punchTime':element[4]
-     }
+      'punchTime':new Date(new Date(element[4]).setHours(new Date(element[4]).getHours()-1))
+    }
      this.attendanceList.push(item)
      this.searchedItem = this.attendanceList
+     console.log(this.searchedItem)
+
     } 
     }
     );
@@ -136,9 +131,4 @@ expandItem(item): void {
     }
     
   }
-
-  
-
-
-
 }

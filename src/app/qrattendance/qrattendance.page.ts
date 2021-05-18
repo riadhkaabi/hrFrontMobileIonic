@@ -148,7 +148,9 @@ async scan() {
         console.log(data['0']);
         const attendance = new Attendance(); 
         var today = new Date();
-        today.setHours(today.getHours() - 1);
+        today.setHours(today.getHours() + 1);
+        today.setHours(today.getHours());
+
         attendance.punchTime = today; 
         attendance.empId = data['0']
         this.tt = today
